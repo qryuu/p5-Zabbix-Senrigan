@@ -1,3 +1,4 @@
+
 package Zabbix::Senrigan;
 
 use 5.010;
@@ -133,9 +134,11 @@ sub _download_graph_images{
     my $period = $self->period;
     my $time   = $self->time;
     my $create_dir = $self->create_dir;
-
-    my $width  = 500;
-    my $days   = Date::Simple::D8->new() - ( $period / 60 / 60 / 24); # 所作が合ってるのか謎
+    my $width  = 2400;
+    my $date  = Date::Simple->today();
+    my $year   =$date->year;
+    my $month  =$date->month()-1;
+    my $days   = Date::Simple::D8->ymd($year,$month,01); # 前月1日
  
     my $mech = WWW::Mechanize->new(ssl_opts => { verify_hostname => 0 }, timeout => 180);
 
@@ -149,11 +152,13 @@ sub _download_graph_images{
 
     for my $graphid (@ids) {
         $pm->start and next;
+        for (my $i=1 ;$i<5 ;$i++ ){
         my $graphurl = "$url/chart2.php?graphid=$graphid&width=$width&period=$period&stime=$days$time";
-
         # main system get png image 
-        $mech->get("$graphurl",":content_file" => "$create_dir/png/${graphid}.png"); 
+        $mech->get("$graphurl",":content_file" => "$create_dir/png/${graphid}.$i.png"); 
         print "$graphurl\n";
+	$days=$days+8
+}
 
         $pm->finish;
         $pm->wait_all_children;
@@ -204,4 +209,3 @@ it under the same terms as Perl itself.
 kenjiskywalker E<lt>git@kenjiskywalker.orgE<gt>
 
 =cut
-

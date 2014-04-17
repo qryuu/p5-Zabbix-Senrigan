@@ -53,7 +53,10 @@
 </ul>
 <p>
 : for $spliced_graphids -> $graphid {
-<a href="./png/<: $graphid :>.png"><img src="./png/<: $graphid :>.png" width="300" ></a>
+<a href="./png/<: $graphid :>.1.png"><img src="./png/<: $graphid :>.1.png" width="600" ></a>
+<a href="./png/<: $graphid :>.2.png"><img src="./png/<: $graphid :>.2.png" width="600" ></a>
+<a href="./png/<: $graphid :>.3.png"><img src="./png/<: $graphid :>.3.png" width="600" ></a>
+<a href="./png/<: $graphid :>.4.png"><img src="./png/<: $graphid :>.4.png" width="600" ></a>
 : }
 </p>
 </div>

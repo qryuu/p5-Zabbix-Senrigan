@@ -12,3 +12,4 @@ requires 'DBD::mysql', '4.024';
 requires 'Carp', '1.32';
 requires 'Date::Simple::D8';
 requires 'Moo', '1.003001';
+requires 'Date::Calc'
